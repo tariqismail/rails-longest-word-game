@@ -1,0 +1,16 @@
+<div class="container">
+  <h1>Result</h1>
+  <p>
+    <% if @result == :valid_word %>
+      <strong>Congratulations!</strong> <%= @answer.upcase %> is a valid English word!
+    <% end %>
+    <% if @result == :invalid_word %>
+      Sorry but <strong><%= @answer.upcase %></strong> does not seem to be a valid English word...
+    <% end %>
+    <% if @result == :invalid_letters %>
+      Sorry but <strong><%= @answer.upcase %></strong> can't be built out of <%= @letters.join(', ') %>
+    <% end %>
+  </p>
+
+  <%= link_to 'Play again', new_path %>
+</div>
