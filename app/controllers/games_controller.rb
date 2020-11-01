@@ -15,19 +15,9 @@ class GamesController < ApplicationController
     @letters = params[:letters].split(' ')
     @answer = params[:answer]
     if exist_in_grid?(@answer)
-      # 2. the word is valid according to the grid but is not an english word
-      if word_valid?(@answer)
-        @result = :valid_word
-        # 3. the word is valid according to the grid and is an english word
-        # @result = "<strong>Congratulations!</strong> #{answer.upcase} is a valid English word!"
-        # @result = "#{content_tag(:strong, 'Congratulations!')} #{answer.upcase} is a valid English word!"
-      else
-        @result = :invalid_word
-        # @result = "Sorry but <strong>#{answer.upcase}</strong> does not seem to be a valid English word..."
-      end
+      @result = word_valid?(@answer) ? :valid_word : :invalid_word
     else
       @result = :invalid_letters
-      # @result = "Sorry but <strong>#{answer.upcase}</strong> can't be built out of #{@letters.join(', ')}"
     end
   end
 
@@ -47,5 +37,4 @@ class GamesController < ApplicationController
     parsed = JSON.parse(response)
     parsed['found']
   end
-
 end
